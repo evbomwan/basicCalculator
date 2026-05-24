@@ -1,0 +1,30 @@
+.calculator{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* flex-basis: 50px; */
+    margin: auto;
+    width: 800px;
+    flex-wrap: wrap;
+}
+button{
+    min-width: 250px;
+    height: 100px;
+    flex: 1;
+}
+.resultBlock{
+    width: 800px;
+    margin: auto;
+    height: 30px;
+    text-align: right;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+.resultBlock:hover{
+    border-bottom: 1px solid orangered;
+}
+.result{
+    padding-right: 100px;
+    font-size: 25px;
+}
