@@ -1,15 +1,42 @@
-function add() {}
-function subtract() {}
-function multiply() {}
-function divide() {}
-
-let num1;
-let num2;
-let operator;
-
-function operate(operator,num1,num2){
-    add();
+function add(num1, num2) {
+  return num1 + num2;
 }
-function updateNumberVariable(){
-    
+function subtract(num1, num2) {
+  return num1 - num2;
+}
+function multiply(num1, num2) {
+  return num1 * num2;
+}
+function divide(num1, num2) {
+  return num1 / num2;
+}
+
+let num1 = "";
+let num2 = "";
+let operator = "";
+
+function operate(num1, operator, num2) {
+  switch (operator) {
+    case "+":
+      return add(num1, num2);
+    case "-":
+      return subtract(num1, num2);
+    case "*":
+      return multiply(num1, num2);
+    case "/":
+      return divide(num1, num2);
+  }
+}
+
+let result = document.querySelector(".result");
+
+const calculator = document.querySelector(".calculator");
+calculator.addEventListener("click", updateNumberVariable);
+
+function updateNumberVariable(event) {
+  const clickedButton = event.target;
+  if (Number.isInteger(Number(clickedButton.textContent))) {
+    num1 += clickedButton.textContent;
+    result.textContent = num1;
+  }
 }
