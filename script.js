@@ -15,6 +15,14 @@ let num1 = "";
 let num2 = "";
 let operator = "";
 
+const result = document.querySelector(".result");
+const equalBtn = document.querySelector(".equalBtn");
+const calculator = document.querySelector(".calculator");
+const operatorBtn = document.querySelector(".operator");
+
+calculator.addEventListener("click", updateNumberVariable);
+equalBtn.addEventListener("click", operate);
+
 function operate(num1, operator, num2) {
   switch (operator) {
     case "+":
@@ -28,15 +36,23 @@ function operate(num1, operator, num2) {
   }
 }
 
-let result = document.querySelector(".result");
-
-const calculator = document.querySelector(".calculator");
-calculator.addEventListener("click", updateNumberVariable);
-
 function updateNumberVariable(event) {
   const clickedButton = event.target;
-  if (Number.isInteger(Number(clickedButton.textContent))) {
-    num1 += clickedButton.textContent;
-    result.textContent = num1;
+  const value = clickedButton.textContent;
+
+  if (Number.isInteger(Number(value))) {
+    if (operator === "") {
+      num1 += value;
+      result.textContent = num1;
+    } else {
+      num2 += value;
+      result.textContent = num1 + operator + num2;
+    }
+  } else if (["+", "-", "*", "/"].includes(value)) {
+    if (num1 === "") return;
+    if (num2 === "") {
+      operator = value;
+      result.textContent = num1 + operator;
+    }
   }
 }
