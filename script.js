@@ -56,14 +56,19 @@ function updateNumberVariable(event) {
     }
   } else if (["+", "-", "*", "/"].includes(value)) {
     if (num1 === "") return;
-    // user cotinues from the previous result
+    // user cotinues from the previous result after clicking =
     if (justEvaluated){
       justEvaluated = false;
     }
-    if (num2 === "") {
-      operator = value;
-      result.textContent = num1 + operator;
+    // if full expression already exists
+    if (num2 !== "") {
+      const currentResult = operate(num1, operator, num2);
+      num1 = String(currentResult);
+      num2 = "";
+    
     }
+    operator = value;
+    result.textContent = num1 + operator;
   }
 }
 
