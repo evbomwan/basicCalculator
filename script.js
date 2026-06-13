@@ -14,6 +14,7 @@ function divide(num1, num2) {
 let num1 = "";
 let num2 = "";
 let operator = "";
+let justEvaluated = false;
 
 const result = document.querySelector(".result");
 const calculator = document.querySelector(".calculator");
@@ -24,9 +25,15 @@ calculator.addEventListener("click", updateNumberVariable);
 equalBtn.addEventListener("click", updateUI);
 
 function updateUI() {
-  if (result.textContent === "") return;
+  if (num1 === "" || operator === "" || num2 === "") return;
   let currentResult = operate(num1, operator, num2);
   result.textContent = currentResult;
+
+  num1 = String(currentResult);
+  num2 = "";
+  operator = "";
+
+  justEvaluated = true
 }
 
 function updateNumberVariable(event) {
@@ -34,6 +41,12 @@ function updateNumberVariable(event) {
   const value = clickedButton.textContent;
 
   if (Number.isInteger(Number(value))) {
+    if (justEvaluated){
+      num1 = "";
+      result.textContent = "";
+      justEvaluated = false;
+    }
+
     if (operator === "") {
       num1 += value;
       result.textContent = num1;
@@ -43,6 +56,10 @@ function updateNumberVariable(event) {
     }
   } else if (["+", "-", "*", "/"].includes(value)) {
     if (num1 === "") return;
+    // user cotinues from the previous result
+    if (justEvaluated){
+      justEvaluated = false;
+    }
     if (num2 === "") {
       operator = value;
       result.textContent = num1 + operator;
