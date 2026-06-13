@@ -16,24 +16,17 @@ let num2 = "";
 let operator = "";
 
 const result = document.querySelector(".result");
-const equalBtn = document.querySelector(".equalBtn");
 const calculator = document.querySelector(".calculator");
 const operatorBtn = document.querySelector(".operator");
+const equalBtn = document.getElementById("equalBtn");
 
 calculator.addEventListener("click", updateNumberVariable);
-equalBtn.addEventListener("click", operate);
+equalBtn.addEventListener("click", updateUI);
 
-function operate(num1, operator, num2) {
-  switch (operator) {
-    case "+":
-      return add(num1, num2);
-    case "-":
-      return subtract(num1, num2);
-    case "*":
-      return multiply(num1, num2);
-    case "/":
-      return divide(num1, num2);
-  }
+function updateUI() {
+  if (result.textContent === "") return;
+  let currentResult = operate(num1, operator, num2);
+  result.textContent = currentResult;
 }
 
 function updateNumberVariable(event) {
@@ -54,5 +47,20 @@ function updateNumberVariable(event) {
       operator = value;
       result.textContent = num1 + operator;
     }
+  }
+}
+
+function operate(num1, operator, num2) {
+  const a = Number(num1);
+  const b = Number(num2);
+  switch (operator) {
+    case "+":
+      return add(a, b);
+    case "-":
+      return subtract(a, b);
+    case "*":
+      return multiply(a, b);
+    case "/":
+      return divide(a, b);
   }
 }
